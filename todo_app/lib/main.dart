@@ -43,7 +43,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController controller = TextEditingController();
+  TextEditingController email_controller = TextEditingController();
+  TextEditingController index_controller = TextEditingController();
   final _fromKey = GlobalKey<FormState>();
   //final List<String> names = <String>[];
 
@@ -86,8 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child:
-                    CustomTextfield(title: "Todo", contoller: this.controller),
+                child: CustomTextfield(
+                    title: "Todo", contoller: this.email_controller),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -152,7 +153,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          showCustomDialog(
+                                              index, FakeServer.emails[index]);
+                                        },
                                         icon: Icon(
                                           Icons.edit,
                                           color: Colors.green,
@@ -188,9 +192,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void addItemToList() {
     setState(() {
-      if (!controller.text.isEmpty) {
-        FakeServer.addItemToList(controller.text);
-        controller.clear();
+      if (!email_controller.text.isEmpty) {
+        FakeServer.addItemToList(email_controller.text);
+        email_controller.clear();
       }
     });
   }
@@ -201,14 +205,50 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  /*void editItemToList(int index, String email) {
+  void showCustomDialog(int index, String email) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Container(
+                color: Colors.blue[400],
+                width: 250,
+                height: 210,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      "Edit",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    CustomTextfield(
+                        title: "Edit Email", contoller: this.email_controller),
+                    CustomTextfield(
+                        title: 'index', contoller: this.index_controller)
+                  ],
+                ),
+              ),
+              actions: [
+                CustomButton(
+                  title: "Submit",
+                  onPressed: () {
+                    editItemToList(index, email);
+                  },
+                ),
+              ],
+            ));
+  }
+
+  void editItemToList(int index, String email) {
     setState(() {
       FakeServer.editItemFromList(index, email);
-      controller.clear();
+      email_controller.clear();
     });
-  }*/
-
+  }
 }
+
 /*
 Padding(
                   padding: EdgeInsets.all(8),

@@ -21,6 +21,7 @@ class FakeServer {
   static editItemFromList(int index, String email) {
     if (emails[index] == index) {
       emails.insert(index, email);
+      showEmailsItems();
     }
   }
 
