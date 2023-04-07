@@ -14,7 +14,8 @@ class FakeServer {
   }
 
   static removeItemFromList(int index) {
-    emails.removeAt(index);
+    emails..removeAt(index);
+    showEmailsItems();
   }
 
   static editItemFromList(int index, String email) {

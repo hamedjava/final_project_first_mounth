@@ -165,7 +165,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          removeItemToList(index);
+                                        },
                                         icon: Icon(
                                           Icons.delete,
                                           color: Colors.red[500],
@@ -195,10 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void removeItemToList(int index) {
     setState(() {
-      if (FakeServer.emails[index] == index) {
-        FakeServer.removeItemFromList(index);
-        controller.clear();
-      }
+      FakeServer.removeItemFromList(index);
     });
   }
 
