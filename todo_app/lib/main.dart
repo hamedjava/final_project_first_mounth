@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/custom_button.dart';
 import 'package:todo_app/custom_textfield.dart';
+import 'package:todo_app/fake_server.dart';
 import 'package:todo_app/login.dart';
+import 'package:todo_app/my_shopping_homepage.dart';
 import 'package:todo_app/signup.dart';
 import 'package:todo_app/splash.dart';
 
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const Signup(),
         '/login': (context) => const Login(),
         '/home': (context) => MyHomePage(title: "Welcome"),
+        '/myshoppinghomepage': (context) => MyShoppingHomePage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -42,8 +45,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController controller = TextEditingController();
   final _fromKey = GlobalKey<FormState>();
-
-  final List<String> listItem = <String>[];
   final List<String> names = <String>[];
 
   @override
@@ -113,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Center(
                                 child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Column(
@@ -124,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     Icon(
                                       Icons.email,
                                       textDirection: TextDirection.rtl,
-                                      color: Colors.redAccent,
+                                      color: Colors.grey[600],
                                     ),
                                   ],
                                 ),
@@ -164,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         onPressed: () {},
                                         icon: Icon(
                                           Icons.delete,
-                                          color: Colors.red,
+                                          color: Colors.red[500],
                                         ))
                                   ],
                                 ),
@@ -182,15 +183,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void addItemToList() {
     setState(() {
-      while (!controller.text.isEmpty) {
-        names.insert(0, controller.text);
-
-        controller.clear();
-      }
+      names.add(controller.text);
+      controller.clear();
+      /**
+       * 
+       */
     });
   }
 }
-
 /*
 Padding(
                   padding: EdgeInsets.all(8),

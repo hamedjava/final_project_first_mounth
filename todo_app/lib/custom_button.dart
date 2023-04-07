@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.redAccent,
+      color: Colors.red[500],
       width: MediaQuery.of(context).size.width / 3,
       height: 30,
       child: RawMaterialButton(
