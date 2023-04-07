@@ -45,7 +45,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController controller = TextEditingController();
   final _fromKey = GlobalKey<FormState>();
-  final List<String> names = <String>[];
+  //final List<String> names = <String>[];
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Scaffold(
                   body: ListView.builder(
                       padding: const EdgeInsets.all(3),
-                      itemCount: names.length,
+                      itemCount: FakeServer.emails.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                             height: 50,
@@ -113,13 +113,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             color: Colors.white,
                             child: Center(
                                 child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Icon(
@@ -137,7 +137,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        '${names[index]}',
+                                        '${FakeServer.emails[index]}',
+                                        /*
+                                        
+                                        * */
                                         style: TextStyle(fontSize: 12),
                                       ),
                                     ),
@@ -145,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     IconButton(
@@ -183,13 +186,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void addItemToList() {
     setState(() {
-      names.add(controller.text);
-      controller.clear();
-      /**
-       * 
-       */
+      if (!controller.text.isEmpty) {
+        FakeServer.addItemToList(controller.text);
+        controller.clear();
+      }
     });
   }
+
+  void removeItemToList(int index) {
+    setState(() {
+      if (FakeServer.emails[index] == index) {
+        FakeServer.removeItemFromList(index);
+        controller.clear();
+      }
+    });
+  }
+
+  /*void editItemToList(int index, String email) {
+    setState(() {
+      FakeServer.editItemFromList(index, email);
+      controller.clear();
+    });
+  }*/
+
 }
 /*
 Padding(
