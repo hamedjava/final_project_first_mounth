@@ -17,12 +17,11 @@ class FakeServer {
     emails.removeAt(index);
   }
 
-  /*static editItemFromList(int index, String email) {
+  static editItemFromList(int index, String email) {
     if (emails[index] == index) {
       emails.insert(index, email);
     }
   }
-  */
 
   static List<String> showEmailsItems() {
     while (!emails.isEmpty) {
